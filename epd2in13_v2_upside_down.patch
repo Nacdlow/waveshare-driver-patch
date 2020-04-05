@@ -1,0 +1,17 @@
+--- epd2in13_V2.py	2020-04-05 18:13:57.707410189 +0400
++++ epd2in13_V2_upside_down.py	2020-04-05 18:15:00.700221371 +0400
+@@ -232,11 +232,10 @@
+             logging.debug("Horizontal")
+             for y in range(imheight):
+                 for x in range(imwidth):
+-                    newx = y
+-                    newy = self.height - x - 1
+                     if pixels[x, y] == 0:
+-                        newy = imwidth - newy - 1
+-                        buf[int(newx / 8) + newy*linewidth] &= ~(0x80 >> (y % 8))
++                        newx = self.width - y
++                        newy = self.height - x
++                        buf[int(newx / 8) + newy*linewidth] &= ~(0x80 >> (newx % 8))
+         return buf   
+         
+         
